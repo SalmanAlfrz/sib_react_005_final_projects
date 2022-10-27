@@ -42,29 +42,35 @@ const SearchPage = () => {
             setLoading(false)
         })
         .catch((err)=>{
-            console.log(err);
+            // return text news not found\
         });
     },[API_URL, search])
 
     return (
         <Grid templateColumns={['repeat(1, 1fr)', 'repeat(4, 1fr)']} gap={6} pr={["10px", "100px"]} pl={["10px", "100px"]}>
+            {/* news loading, news found, and news not found */}
             {loading ? (
                 <Text fontSize="2xl" fontWeight="bold" justifyContent="center" textAlign="center">Loading...</Text>
             ) : (
-                data.map((item, index) => (
-                    <CardNews
-                        key={item.title}
-                        title={item.title}
-                        description={item.description}
-                        url={item.url}
-                        imageUrl={item.urlToImage}
-                        publishedAt={item.publishedAt}
-                        imageAlt={item.title}
-                        category="Search"
-                        status={item.save}
-                        handleClick={()=> getDatabyIndex(index)}
-                    />
-                ))
+                data.length === 0 ? (
+                    <Text fontSize="2xl" fontWeight="bold" justifyContent="center" textAlign="center">News Not Found</Text>
+                ) : (
+                    data.map((item, index) => (
+                        <CardNews
+                            key={item.title}
+                            title={item.title}
+                            description={item.description}
+                            url={item.url}
+                            imageUrl={item.urlToImage}
+                            publishedAt={item.publishedAt}
+                            imageAlt={item.title}
+                            save={item.save}
+                            category={item.category}
+                            index={index}
+                            getDatabyIndex={getDatabyIndex}
+                        />
+                    ))
+                )
             )}
         </Grid>
     );

@@ -9,6 +9,7 @@ import CovidPage from './pages/CovidPage';
 import SavedPage from './pages/SavedPage';
 import SearchPage from './pages/SearchPage';
 import Footer from './components/Footer';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/covid" element={<CovidPage />} />
         <Route path="/saved" element={<SavedPage />} />
         <Route path="/search/*" element={<SearchPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

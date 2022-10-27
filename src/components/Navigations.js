@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Button, Stack, Text } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navigation = (props) => {
     const location = useLocation()
@@ -12,7 +13,8 @@ const Navigation = (props) => {
 };
 
 const MenuLinks = ({ url }) => {
-    const namePage = url.slice(8)
+    const search = useSelector((state) => state.search)
+
     function capitalizeFirstLetter(str) {
 
         // converting first letter to uppercase
@@ -342,7 +344,23 @@ const MenuLinks = ({ url }) => {
                 </Stack>
             </Stack>
         );
-    } else {
+    } else if (url === "/about") {
+        return (
+            <>
+                <Stack spacing={8}>
+                    <Stack
+                        spacing={["10px", "120px"]}
+                        align="center"
+                        justify="center"
+                        direction={["column", "row"]}
+                    >
+                        <Text fontSize="4xl" fontWeight="bold">About Pages</Text>
+                    </Stack>
+                </Stack>
+            </>
+        )
+    }
+    else if (url === "/search") {
         return (
             <>
                 <Stack spacing={8}>
@@ -353,7 +371,7 @@ const MenuLinks = ({ url }) => {
                         direction={["column", "row"]}
 
                     >
-                        <Text fontSize="4xl" fontWeight="bold">{capitalizeFirstLetter(namePage)} Pages</Text>
+                        <Text fontSize="4xl" fontWeight="bold">{capitalizeFirstLetter(search.search)} Pages</Text>
                     </Stack>
 
                     <Stack

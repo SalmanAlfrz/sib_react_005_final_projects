@@ -7,6 +7,7 @@ import {
     Text,
     useColorModeValue,
 } from '@chakra-ui/react';
+import { Link as Direct } from 'react-router-dom';
 
 export default function LargeWithNewsletter() {
     return (
@@ -18,9 +19,9 @@ export default function LargeWithNewsletter() {
             <Container maxW={'6xl'} py={10}>
                 <SimpleGrid>
                     <Stack align={'flex-start'} marginLeft={["0","-180px"]}>
-                        <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
-                            Stakeholder
-                        </Text>
+                        <Direct to="/about"><Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+                            About Us
+                        </Text></Direct>
                         <Link href={'#'}>Moh. Aulia Miftakhurahmat - Desainer UI UX</Link>
                         <Link href={'#'}>Effendi Prakoso -  Intergrasi Data</Link>
                         <Link href={'#'}>Salman Alfarizi - Intergrasi UI UX</Link>

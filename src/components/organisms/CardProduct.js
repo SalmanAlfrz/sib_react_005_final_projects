@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { cartAdded } from "../../features/listSlice";
 import Badge from "../Atoms/Badge";
 import Button from "../Atoms/Button";
 
 const CardProduct = (props) => {
+  const dispatch = useDispatch();
+  const [Login, setLogin] = useState(false);
+
+  const addCart = (data) => {
+    if (Login) {
+      dispatch(cartAdded(data));
+    } else {
+      alert("Login dulu bro");
+    }
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+    
+  }, [Login]);
+  
   return (
     <>
       {props.list.map((product) => (
@@ -28,7 +51,7 @@ const CardProduct = (props) => {
               <Button buttonSecondary isSmall>
                 <Link to={`/product/${product.id}`}>Detail</Link>
               </Button>
-              <Button buttonPrimary isSmall>
+              <Button handleClick={()=>addCart(product)} buttonPrimary isSmall>
                 <Link to="/cart">Add to Cart</Link>
               </Button>
             </div>

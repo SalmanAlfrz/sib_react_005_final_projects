@@ -10,10 +10,6 @@ const initialState = {
   totalRevenue: 0,
   error: '',
   isFetch: true,
-  isLogin: {
-    token: null,
-    isAdmin: false,
-  },
 };
 
 // generates pending, fullfilled and rejected action types
@@ -32,14 +28,19 @@ const listSlice = createSlice({
   name: 'list',
   initialState,
   reducers: {
-    listAdded: {
-      reducer(state, action) {
-        state.list = action.payload;
-      },
-    },
     updateStock: {
       reducer(state, action) {
         state.list[action.payload.index].stock = action.payload.stock;
+      },
+    },
+    updateStockBy1: {
+      reducer(state, action) {
+        state.list[action.payload].stock += 1
+      },
+    },
+    removeStockBy1: {
+      reducer(state, action) {
+        state.list[action.payload].stock -= 1
       },
     },
     cartAdded: {
@@ -51,15 +52,13 @@ const listSlice = createSlice({
           return object.id === newItem.id;
         });
         if (temp === undefined) {
-          newItem.quantity = 1;
-          // console.log(newItem);
-          
           if (
             state.list[indexStock].stock < 0 ||
             state.list[indexStock].stock === 0
           ) {
             alert('Stock sudah habis');
           } else {
+            newItem.quantity = 1;
             state.cart.push(newItem);
             state.totalPrice = state.totalPrice + newItem.price;
             state.list[indexStock].stock -= 1;
@@ -83,6 +82,7 @@ const listSlice = createSlice({
       },
     },
     cartAdd1: {
+      //add quantity by 1
       reducer(state, action) {
         const newItem = { ...action.payload };
         const indexStock = state.list.findIndex((object) => {
@@ -101,13 +101,13 @@ const listSlice = createSlice({
       },
     },
     cartRemove1: {
+      //minus quantity by 1
       reducer(state, action) {
         const newItem = { ...action.payload };
         //find rekap id
         const indexStock = state.list.findIndex((object) => {
           return object.id === newItem.id;
         });
-      
 
         const index = state.cart.findIndex((object) => {
           return object.id === newItem.id;
@@ -120,14 +120,14 @@ const listSlice = createSlice({
           state.totalPrice = state.totalPrice - state.cart[index].price;
           state.list[indexStock].stock += 1;
           state.cart = state.cart.filter((cart) => cart.id !== newItem.id);
-          console.log('Quantity Minus');
+          
         }
       },
     },
     checkOut: {
+      //checkout to rekap
       reducer(state, action) {
         let dataTemp = action.payload;
-        console.log(dataTemp);
         if (state.cart.length !== 0) {
           dataTemp.map((data) => {
             let temp = state.rekap.find((obj) => obj.id === data.id);
@@ -140,7 +140,7 @@ const listSlice = createSlice({
               state.rekap[index].quantity =
                 state.rekap[index].quantity + data.quantity;
             }
-            return data
+            return data;
           });
           state.totalRevenue = state.totalRevenue + state.totalPrice;
           state.cart = [];
@@ -148,24 +148,6 @@ const listSlice = createSlice({
         } else {
           alert('Cart Masih Kosong!');
         }
-      },
-    },
-    LoginCustomer: {
-      reducer(state, action) {
-        state.isLogin.token = action.payload;
-        state.isLogin.isAdmin = false;
-      },
-    },
-    LoginAdmin: {
-      reducer(state, action) {
-        state.isLogin.token = 'admin';
-        state.isLogin.isAdmin = true;
-      },
-    },
-    LogOutAll: {
-      reducer(state, action) {
-        state.isLogin.token = null;
-        state.isLogin.isAdmin = false;
       },
     },
   },
@@ -189,15 +171,6 @@ const listSlice = createSlice({
   },
 });
 
-export const {
-  listAdded,
-  updateStock,
-  cartAdded,
-  cartAdd1,
-  cartRemove1,
-  checkOut,
-  LoginCustomer,
-  LoginAdmin,
-  LogOutAll,
-} = listSlice.actions;
+export const { updateStock, cartAdded, cartAdd1, cartRemove1, checkOut, updateStockBy1, removeStockBy1 } =
+  listSlice.actions;
 export default listSlice.reducer;

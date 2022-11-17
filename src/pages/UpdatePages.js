@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Button from "../components/Atoms/Button";
-import { updateStock } from "../features/listSlice";
-import { fetchList } from "../features/listSlice";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '../components/Atoms/Button';
+import { removeStockBy1, updateStockBy1 } from '../features/listSlice';
+import { fetchList } from '../features/listSlice';
 
 const UpdatePages = () => {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.list.list);
-  const [stock, setStock] = useState();
 
-  const handleAddStock = (index, stock, e) => {
-    dispatch(updateStock({ index, stock }));
-    setStock(0);
+ 
+
+  const addby1 = (index) => {
+    dispatch(updateStockBy1(index));
   };
 
-  const handleInput = (e) => {
-    setStock(e.target.value);
+  const removeby1 = (index) => {
+    dispatch(removeStockBy1(index))
   };
 
   useEffect(() => {
@@ -25,16 +25,17 @@ const UpdatePages = () => {
 
   return (
     <>
-      <div className="container mx-auto my-10">
-        <h1 className="text-5xl font-bold mb-10" style={{ color: "#47A025" }}>Stock Products</h1>
-        <div className="overflow-x-auto w-full">
-          <table className="table w-full table-normal">
+      <div className='container mx-auto my-10'>
+        <h1 className='text-5xl font-bold mb-10' style={{ color: '#47A025' }}>
+          Stock Products
+        </h1>
+        <div className='overflow-x-auto w-full'>
+          <table className='table w-full table-normal'>
             <thead>
               <tr>
                 <th>Product</th>
                 <th></th>
                 <th>Stock</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -44,7 +45,7 @@ const UpdatePages = () => {
                     <td>
                       <figure>
                         <img
-                          className="h-40 p-3 m-1"
+                          className='h-40 p-3 m-1'
                           src={data.image}
                           alt={data.title}
                         />
@@ -52,24 +53,21 @@ const UpdatePages = () => {
                     </td>
                     <td>{data.title}</td>
                     <td>
-                      <Button buttonDanger>-</Button>
-                      <span className="mx-2">
+                      <Button handleClick={()=>removeby1(index)} buttonDanger>-</Button>
+                      <span className='mx-2'>
                         <input
-                          type="number"
-                          placeholder="1"
-                          id="stock"
-                          className="input input-bordered input-primary w-16"
+                          type='number'
+                          id='stock'
+                          className='input input-bordered input-primary w-16'
                           value={data.stock}
-                          onChange={(e) => handleInput(e)}
+                          readOnly
                         />
                       </span>
-                      <Button buttonPrimary>+</Button>
-                    </td>
-                    <td>
-                      <Button buttonPrimary onClick={() => handleAddStock(index, stock)}>
-                        Update
+                      <Button handleClick={() => addby1(index)} buttonPrimary>
+                        +
                       </Button>
                     </td>
+                
                   </tr>
                 ))}
             </tbody>

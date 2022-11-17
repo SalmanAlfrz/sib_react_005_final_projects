@@ -3,11 +3,33 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/Atoms/Button";
 import IconBack from "../components/icons/IconBack";
+import { useDispatch } from "react-redux";
+import { cartAdded } from "../features/listSlice";
 
 const DetailProductPages = (props) => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState([]);
+
+  const dispatch = useDispatch();
+  const [Login, setLogin] = useState(false);
+
+  const addCart = (data) => {
+    if (Login) {
+      dispatch(cartAdded(data));
+    } else {
+      alert("Login dulu bro");
+    }
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+    
+  }, [Login]);
 
   useEffect(() => {
     setLoading(true);
@@ -44,26 +66,16 @@ const DetailProductPages = (props) => {
                   <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="#">{product.category}</a>
+                  <a href="/">{product.category}</a>
                 </li>
               </ul>
             </div>
             <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
             <p className="font-semibold text-2xl mb-5">$ {product.price}</p>
             <div className="mb-24">
-              <span className="mr-10">
-                <Button buttonDanger>-</Button>
-                <span className="mx-2">
-                  <input
-                    type="text"
-                    placeholder="1"
-                    className="input input-bordered input-primary w-16"
-                    // value=""
-                  />
-                </span>
-                <Button buttonPrimary>+</Button>
-              </span>
-              <Button buttonPrimary>Add to Cart</Button>
+              
+              <Button handleClick={()=>addCart(product)} buttonPrimary>
+              <Link to="/cart">Add to Cart</Link></Button>
             </div>
             <h2 className="text-2xl font-bold mb-4">Product Detail</h2>
             <p className="">{product.description}</p>

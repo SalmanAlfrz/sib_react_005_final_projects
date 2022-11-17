@@ -2,21 +2,13 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardProduct from "../components/organisms/CardProduct";
-import { fetchList, cartAdded } from "../features/listSlice";
+import { fetchList } from "../features/listSlice";
 
 const HomePages = () => {
   // const list = useSelector((state) => state.list.list);
   const list = useSelector((state) => state.list.list);
   const dispatch = useDispatch();
   const [Login, setLogin] = useState(false);
-
-  const addCart = (data) => {
-    if (Login) {
-      dispatch(cartAdded(data));
-    } else {
-      alert("Login dulu bro");
-    }
-  };
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

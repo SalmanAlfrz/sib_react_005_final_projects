@@ -31,7 +31,7 @@ const LoginForm = () => {
           let { token } = res.data;
 
           localStorage.setItem("token", token);
-          console.log("login berhasil dengan token: ", token);
+
           navigate("/home");
         })
         .catch((error) => {
@@ -41,7 +41,7 @@ const LoginForm = () => {
   };
   return (
     <>
-      <div class="grid h-screen place-items-center" style={{marginTop: "-80px"}}>
+      <div className="grid h-screen place-items-center" style={{marginTop: "-80px"}}>
         <div className="hero">
           <div className="hero-content flex-col lg:flex-row">
             <div className="text-center lg:text-left mr-64">

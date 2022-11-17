@@ -9,7 +9,7 @@ const Button = (props) => {
   if (props.isBig) className.push("btn-lg text-sm");
   if (props.isFullWidth) className.push("text-xs w-full");
   if (props.isSmall) className.push("btn-sm text-xs");
-  return <button className={className.join(" ")}>{props.children}</button>;
+  return <button onClick={props.handleClick} className={className.join(" ")}>{props.children}</button>;
 };
 
 Button.propTypes = {

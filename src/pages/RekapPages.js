@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const RekapPages = () => {
   const data = useSelector((state) => state.list);
 
-  useEffect(() => { }, []);
   return (
     <>
 
@@ -22,10 +21,10 @@ const RekapPages = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {data !== null &&
-                data.map((data, index) => (
-                  <tr key={index}>
-                    <td>
+              {data.rekap !== null &&
+            data.rekap.map((data, index) => (
+              <tr key={data.id}>
+                <td>
                       <figure>
                         <img
                           className="h-40 p-3 m-1"
@@ -35,22 +34,11 @@ const RekapPages = () => {
                       </figure>
                     </td>
                     <td>{data.title}</td>
-                    <td>{data.price}</td>
-                    <td>
-                    terjual
-                    </td>
-                    <td>
-                    total
-                    </td>
-                  </tr>
-                ))} */}
-              <tr>
-                <td>Photo</td>
-                <td>nama</td>
-                <td>harga</td>
-                <td>terjual</td>
-                <td>income</td>
+                <td>${data.price}</td>
+                <td>{data.quantity}</td>
+                <td>${data.price * data.quantity}</td>
               </tr>
+            ))}
             </tbody>
             <tfoot>
               <tr>
@@ -58,7 +46,7 @@ const RekapPages = () => {
                 <th></th>
                 <th></th>
                 <th>Total</th>
-                <th>{data.totalPrice.toFixed(2)}</th>
+                <th>${data.totalRevenue.toFixed(2)}</th>
               </tr>
             </tfoot>
           </table>

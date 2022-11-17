@@ -22,14 +22,14 @@ const Navbar = () => {
 
   return (
     <div id="navbar" className="navbar bg-base-100">
-      <div className="flex-none">
+      <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
           Belanjapedia
         </Link>
       </div>
       <div>
-        <ul className="menu menu-horizontal p-0 flex-1">
-          <li>
+        <ul tabIndex={0} className="menu menu-horizontal flex-1">
+          <li className="mr-5">
             <NavLink
               as={Link}
               end
@@ -40,7 +40,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           {localStorage.getItem("token") && localStorage.getItem("isAdmin") && (
-            <li>
+            <li className="mr-5">
               <NavLink
                 as={Link}
                 to="/update"
@@ -51,7 +51,7 @@ const Navbar = () => {
             </li>
           )}
           {localStorage.getItem("token") && localStorage.getItem("isAdmin") && (
-            <li>
+            <li className="mr-5">
               <NavLink
                 as={Link}
                 to="/rekap"
@@ -61,7 +61,7 @@ const Navbar = () => {
               </NavLink>
             </li>
           )}
-          <li>
+          <li className="mr-5">
             <NavLink
               as={Link}
               to="/cart"

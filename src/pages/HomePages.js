@@ -29,7 +29,7 @@ const HomePages = () => {
 
   return (
     <div>
-      <h1 className="text-4xl text-center mb-10">Products</h1>
+      <h1 className="text-5xl font-bold text-center mb-10">Products</h1>
       <div className="w-4/5 mx-auto mb-10">
         <div className="grid xl:grid-cols-5 lg:grid-cols-3 gap-10 sm:grid-cols-2">
           <CardProduct list={list} />

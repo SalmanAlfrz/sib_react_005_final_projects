@@ -25,39 +25,57 @@ const UpdatePages = () => {
 
   return (
     <>
-      <table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Product</th>
-            <th>Stock</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data !== null &&
-            data.map((data, index) => (
-              <tr key={data.id}>
-                <td>{data.id}</td>
-                <td>{data.title}</td>
-                <td>{data.stock}</td>
-                <td>
-                  <form
-                    type="number"
-                    id="stock"
-                    onChange={(e) => handleInput(e)}
-                    aria-describedby="passwordHelpBlock"
-                  />
-                </td>
-                <td>
-                  <Button onClick={() => handleAddStock(index, stock)}>
-                    Update
-                  </Button>
-                </td>
+      <div className="container mx-auto my-10">
+        <h1 className="text-5xl font-bold mb-10" style={{ color: "#47A025" }}>Stock Products</h1>
+        <div className="overflow-x-auto w-full">
+          <table className="table w-full table-normal">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th></th>
+                <th>Stock</th>
+                <th>Action</th>
               </tr>
-            ))}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {data !== null &&
+                data.map((data, index) => (
+                  <tr key={index}>
+                    <td>
+                      <figure>
+                        <img
+                          className="h-40 p-3 m-1"
+                          src={data.image}
+                          alt={data.title}
+                        />
+                      </figure>
+                    </td>
+                    <td>{data.title}</td>
+                    <td>
+                      <Button buttonDanger>-</Button>
+                      <span className="mx-2">
+                        <input
+                          type="number"
+                          placeholder="1"
+                          id="stock"
+                          className="input input-bordered input-primary w-16"
+                          value={data.stock}
+                          onChange={(e) => handleInput(e)}
+                        />
+                      </span>
+                      <Button buttonPrimary>+</Button>
+                    </td>
+                    <td>
+                      <Button buttonPrimary onClick={() => handleAddStock(index, stock)}>
+                        Update
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 };

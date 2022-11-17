@@ -43,69 +43,84 @@ const CartPages = () => {
 
   return (
     <>
-      <div className="container">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>#adas</th>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Action</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* {data.cart !== null &&
-              data.cart.map((data, index) => (
-                <tr key={data.id}>
-                  <td>{data.id}</td>
-                  <td>{data.title}</td>
-                  <td>{data.quantity}</td>
-                  <td>
-                    <Button onClick={() => handleAdd(data)}>+</Button>{" "}
-                    <span></span>
-                    <Button onClick={() => handleRemove(data)}>-</Button>
-                  </td>
-                  <td>${data.price * data.quantity}</td>
-                </tr>
-              ))} */}
-            <tr>
-              <td>1</td>
-              <td>Product</td>
-              <td>Quantity</td>
-              <td>
-                <Button>+</Button> <span></span>
-                <Button>-</Button>
-              </td>
-              <td>$</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Product</td>
-              <td>Quantity</td>
-              <td>
-                <Button>+</Button> <span></span>
-                <Button>-</Button>
-              </td>
-              <td>$</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Product</td>
-              <td>Quantity</td>
-              <td>
-                <Button>+</Button> <span></span>
-                <Button>-</Button>
-              </td>
-              <td>$</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <p>Total: ${data.totalPrice.toFixed(2)}</p>
-          </tfoot>
-        </table>
+      <div className="container mx-auto my-10">
+        <h1 className="text-5xl font-bold mb-10" style={{ color: "#47A025" }}>My Cart</h1>
+        <div className="overflow-x-auto w-full">
+          <table className="table w-full table-normal">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th></th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.cart !== null &&
+                data.cart.map((data, index) => (
+                  <tr key={index}>
+                    <td>
+                      <figure>
+                        <img
+                          className="h-40 p-3 m-1"
+                          src={data.image}
+                          alt={data.title}
+                        />
+                      </figure>
+                    </td>
+                    <td>{data.title}</td>
+                    <td>{data.price}</td>
+                    <td>
+                      <Button buttonDanger onClick={() => handleRemove(data)}>-</Button>
+                      <span className="mx-2">
+                        <input
+                          type="text"
+                          placeholder="1"
+                          className="input input-bordered input-primary w-16"
+                        // value=""
+                        />
+                      </span>
+                      <Button buttonPrimary onClick={() => handleAdd(data)}>+</Button>
+                    </td>
+                    <td>${data.price * data.quantity}</td>
+                  </tr>
+                ))}
+              <tr className="table-tr ">
+                <td>Photo</td>
+                <td>Nama</td>
+                <td>Harga</td>
+                <td>
+                  <Button buttonDanger>-</Button>
+                  <span className="mx-2">
+                    <input
+                      type="text"
+                      placeholder="1"
+                      className="input input-bordered input-primary w-16"
+                    // value=""
+                    />
+                  </span>
+                  <Button buttonPrimary>+</Button>
+                </td>
+                <td>total</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Total</th>
+                <th>{data.totalPrice.toFixed(2)}</th>
+              </tr>
+            </tfoot>
+
+          </table>
+        </div>
+        <div className="flex justify-end mt-10">
+          <Button buttonPrimary onClick={() => handleCheckOut(data)}>Check Out</Button>
+        </div>
       </div>
-      <Button onClick={() => handleCheckOut(data.cart)}>checkOut</Button>
     </>
   );
 };

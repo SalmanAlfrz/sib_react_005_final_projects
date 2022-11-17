@@ -9,6 +9,8 @@ import CartPages from "./pages/CartPages";
 import DetailProductPages from "./pages/DetailProductPages";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/organisms/Navbar";
+import Footer from "./components/organisms/Footer";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   window.onscroll = () => {
@@ -29,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePages />} />
           <Route path="/home" element={<HomePages />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route
             path="/update"
             element={
@@ -59,6 +62,7 @@ function App() {
           <Route path="/login" element={<LoginPages />} />
           <Route path="*" element={<h1>Pages not Found</h1>} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

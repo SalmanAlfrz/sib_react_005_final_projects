@@ -4,20 +4,17 @@ import Footer from '../components/Footer';
 const property = [{
     name: "Effendi Prakoso",
     code: "RCTN-KS05-016",
-    imageUrl: require("../images/Effendi.jpg"),
-    title: 'Bertugas untuk Integrasi data API'
+    imageUrl: require("../images/Effendi.jpg")
 },
 {
     name: "Salman Alfarizi",
     code: "RCTN-KS05-018",
-    imageUrl: require("../images/salman.jpg"),
-    title: 'Bertugas untuk Integrasi UI UX'
+    imageUrl: require("../images/salman.jpg")
 },
 {
     name: "Moh. Aulia Miftakhurahmat",
     code: "RCTN-KS05-021",
-    imageUrl: require("../images/miftah.jpg"),
-    title: 'Bertugas untuk mendesain UI UX'
+    imageUrl: require("../images/miftah.jpg")
 },]
 
 
@@ -34,7 +31,6 @@ const About = () => {
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">{item.name}</h2>
                         <p>{item.code}</p>
-                        <p>{item.title}</p>
                     </div>
                 </div>
                 ))}
